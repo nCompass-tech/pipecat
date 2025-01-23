@@ -63,9 +63,10 @@ def get_bot_file():
     # If blank or None, default to openai
     if not bot_implementation:
         bot_implementation = "openai"
-    if bot_implementation not in ["openai", "gemini"]:
+    if bot_implementation not in ["openai", "gemini", "ncompass"]:
         raise ValueError(
-            f"Invalid BOT_IMPLEMENTATION: {bot_implementation}. Must be 'openai' or 'gemini'"
+            f"Invalid BOT_IMPLEMENTATION: {bot_implementation}. Must be 'openai', 'gemini' or
+            'ncompass'"
         )
     return f"bot-{bot_implementation}"
 
