@@ -158,7 +158,7 @@ async def main():
         )
 
         # Initialize LLM service
-        llm = OpenAILLMService(api_key=os.getenv("NCOMPASS_API_KEY"), model="gpt-4o")
+        llm = OpenAILLMService(api_key=os.getenv("OPENAI_API_KEY"), model="gpt-4o")
 
         messages = [
             {
