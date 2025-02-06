@@ -71,6 +71,7 @@ sprites.extend(flipped)
 quiet_frame = sprites[0]  # Static frame for when bot is listening
 talking_frame = SpriteFrame(images=sprites)  # Animation sequence for when bot is talking
 
+
 class TalkingAnimation(FrameProcessor):
     """Manages the bot's visual animation states.
 
