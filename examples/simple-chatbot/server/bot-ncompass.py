@@ -43,7 +43,8 @@ from pipecat.processors.aggregators.openai_llm_context import OpenAILLMContext
 from pipecat.processors.frame_processor import FrameDirection, FrameProcessor
 from pipecat.processors.frameworks.rtvi import RTVIConfig, RTVIProcessor
 from pipecat.services.elevenlabs import ElevenLabsTTSService
-from pipecat.services.ncompass import NCompassLLMService
+from pipecat.services.ncompass import NCompassFilter
+from pipecat.services.openai import OpenAILLMService
 from pipecat.transports.services.daily import DailyParams, DailyTransport
 
 load_dotenv(override=True)
@@ -69,7 +70,6 @@ sprites.extend(flipped)
 # Define static and animated states
 quiet_frame = sprites[0]  # Static frame for when bot is listening
 talking_frame = SpriteFrame(images=sprites)  # Animation sequence for when bot is talking
-
 
 class TalkingAnimation(FrameProcessor):
     """Manages the bot's visual animation states.
@@ -116,6 +116,7 @@ async def main():
     """
     async with aiohttp.ClientSession() as session:
         (room_url, token) = await configure(session)
+        audio_in_filter = NCompassFilter(api_key=os.getenv("NCOMPASS_API_KEY"))
 
         # Set up Daily transport with video/audio parameters
         transport = DailyTransport(
@@ -124,6 +125,7 @@ async def main():
             "Chatbot",
             DailyParams(
                 audio_out_enabled=True,
+                audio_in_filter=audio_in_filter,
                 camera_out_enabled=True,
                 camera_out_width=1024,
                 camera_out_height=576,
@@ -156,7 +158,7 @@ async def main():
         )
 
         # Initialize LLM service
-        llm = NCompassLLMService(api_key=os.getenv("NCOMPASS_API_KEY"), model="gpt-4o")
+        llm = OpenAILLMService(api_key=os.getenv("NCOMPASS_API_KEY"), model="gpt-4o")
 
         messages = [
             {
