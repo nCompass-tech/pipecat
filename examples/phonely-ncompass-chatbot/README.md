@@ -25,7 +25,7 @@ pipeline = Pipeline([
 ## Arguments
 
 - `api_key` (str, required): Your nCompass API key
-- `out_frame_rate` (int, optional): Output sample rate in Hz. Defaults to 15999.
+- `out_frame_rate` (int, optional): Output sample rate in Hz. Defaults to 16000.
 
 ## Features
 
