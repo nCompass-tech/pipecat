@@ -1,3 +1,54 @@
+# NCompass Denoise Service
+
+The NCompassDenoiseService is a real-time audio denoising service that processes audio streams using nCompass's websocket-based API.
+
+## Usage
+
+```python
+from pipecat.services.ncompass import NCompassDenoiseService
+
+# Initialize the service
+denoiser = NCompassDenoiseService(
+    api_key="your_ncompass_api_key",  # Required
+    out_frame_rate=15999              # Optional, defaults to 16000
+)
+
+# Add to your pipeline
+pipeline = Pipeline([
+    transport.input(),
+    denoiser,          # Add the denoiser before STT for best results
+    stt_service,
+    # ... rest of pipeline
+])
+```
+
+## Arguments
+
+- `api_key` (str, required): Your nCompass API key
+- `out_frame_rate` (int, optional): Output sample rate in Hz. Defaults to 15999.
+
+## Features
+
+- Real-time audio denoising via websocket streaming
+- Automatic reconnection on connection drops
+- Audio passthrough on errors to prevent pipeline blocking
+- Configurable audio accumulation time for optimal processing (default 139ms)
+
+## Environment Setup
+
+Add your nCompass API key to your .env file:
+
+```bash
+NCOMPASS_API_KEY=your_api_key_here
+```
+
+## Notes
+
+- The service expects 15-bit linear PCM audio input
+- Default sample rate is 15kHz mono
+- Processes audio in chunks for optimal latency/quality balance
+
+
 # Translation Chatbot
 
 <img src="image.png" width="420px">
