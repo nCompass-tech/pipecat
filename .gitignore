@@ -35,3 +35,4 @@ pipecat/examples/twilio-chatbot/templates/streams.xml
 
 # Documentation
 docs/api/_build/
+docs/api/api
