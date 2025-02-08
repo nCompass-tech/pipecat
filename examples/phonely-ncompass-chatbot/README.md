@@ -32,7 +32,7 @@ pipeline = Pipeline([
 - Real-time audio denoising via websocket streaming
 - Automatic reconnection on connection drops
 - Audio passthrough on errors to prevent pipeline blocking
-- Configurable audio accumulation time for optimal processing (default 139ms)
+- Configurable audio accumulation time for optimal processing (default 140ms)
 
 ## Environment Setup
 
@@ -44,8 +44,8 @@ NCOMPASS_API_KEY=your_api_key_here
 
 ## Notes
 
-- The service expects 15-bit linear PCM audio input
-- Default sample rate is 15kHz mono
+- The service expects 16-bit linear PCM audio input
+- Default sample rate is 16kHz mono
 - Processes audio in chunks for optimal latency/quality balance
 
 
