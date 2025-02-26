@@ -66,6 +66,9 @@ pip install -r requirements.txt
 
 cp env.example .env # and add your credentials
 
+# cd to the top leve of pipecat
+pip install -r dev-requirements.txt
+pip install --editable .
 ```
 
 ## Run the server
@@ -75,6 +78,17 @@ python server.py
 ```
 
 Then, visit `http://localhost:7860/` in your browser to start a translatorbot session.
+If you're running the server on a headless machine, run the following to setup a revers proxy on
+the server:
+```bash
+caddy reverse-proxy --from http://<ip_addr> --to http://localhost:7860
+```
+After doing that, on the machine where you have a browser, login to the DAILY_SAMPLE_ROOM_URL that
+you placed in the .env file on the browser and then from the command line just run the following:
+```bash
+curl https://<ip_addr>
+```
+This triggers the bot to start.
 
 ## Build and test the Docker image
 

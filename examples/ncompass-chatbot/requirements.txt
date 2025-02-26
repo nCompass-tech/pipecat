@@ -1,4 +1,6 @@
 python-dotenv
 fastapi[all]
-pipecat-ai[daily,openai,azure]
+pipecat-ai[daily,openai,azure,cartesia,deepgram]
 aiohttp
+onnxruntime
+structlog
